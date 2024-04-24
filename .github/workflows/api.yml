@@ -1,0 +1,30 @@
+name: API
+
+on:
+  workflow_call:
+    inputs:
+      publish:
+        required: true
+        type: string
+
+jobs:
+  api:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        run: |
+          cd projects/api
+          make install
+
+      - name: Run tests
+        run: |
+          cd projects/api
+          make test
+
+      - name: Publish
+        if: inputs.publish == 'true'
+        run: |
+          echo "Publish"

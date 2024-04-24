@@ -1,0 +1,39 @@
+name: Main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    outputs:
+      open_infra_pr: ${{ steps.setup.outputs.open_infra_pr }}
+      publish: ${{ steps.setup.outputs.publish }}
+    steps:
+      - name: Setup
+        id: setup
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]] && [[ ${{ github.ref }} == refs/heads/main ]]; then
+            echo "open_infra_pr=true" >> "$GITHUB_OUTPUT"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  api:
+    needs: [setup]
+    uses: ./.github/workflows/api.yml
+    with:
+      publish: ${{ needs.setup.outputs.publish }}
+
+  infra:
+    needs: [api, setup]
+    uses: ./.github/workflows/infra.yml
+    secrets:
+      GITOPS_DEMO_BOT_GITHUB_TOKEN: ${{ secrets.GITOPS_DEMO_BOT_GITHUB_TOKEN }}
+    with:
+      open_infra_pr: ${{ needs.setup.outputs.open_infra_pr }}
