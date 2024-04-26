@@ -24,5 +24,5 @@ jobs:
 
       - name: Create new branch
         run: |
-          git switch -c hotfix-bases/${{ github.event.inputs.branch_name }}
-          git push origin hotfix-bases/${{ github.event.inputs.branch_name }}
+          git switch -c hotfixes/${{ github.event.inputs.branch_name }}
+          git push origin hotfixes/${{ github.event.inputs.branch_name }}
