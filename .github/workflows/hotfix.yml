@@ -24,5 +24,9 @@ jobs:
           git branch
           git log
 
+          git switch -c hotfix-bases/${{ github.event.inputs.branch_name }}
+
+          git branch
+
           # git checkout -b hotfix-bases/${{ github.event.inputs.branch_name }} ${{ github.event.inputs.base_commit_sha }}
-          # git push origin
+          git push origin
