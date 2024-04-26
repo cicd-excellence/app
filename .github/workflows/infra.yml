@@ -22,5 +22,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITOPS_DEMO_BOT_GITHUB_TOKEN }}
         run: |
-          echo "Open PR Infra"
+          echo "Opening PR in infra repo to update dev to $GITHUB_SHA"
           TAG=$GITHUB_SHA bash scripts/open_infra_pr.sh
