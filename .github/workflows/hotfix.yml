@@ -1,8 +1,5 @@
 name: Hotfix
 
-permissions:
-  contents: write
-
 on:
   workflow_dispatch:
     inputs:
@@ -19,8 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
         with:
           ref: ${{ github.event.inputs.base_commit_sha }}
+          token: ${{ secrets.GITOPS_DEMO_BOT_GITHUB_TOKEN }}
 
       - name: Create new branch
         run: |
