@@ -3,8 +3,5 @@ install:
 	npm install
 
 .PHONY: test
-test: test.unit
-
-.PHONY: test.unit
-test.unit:
-	@echo "TODO test.unit"
+test:
+	@echo "Pretenting to run API tests"
