@@ -16,8 +16,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.base_commit_sha }}
 
       - name: Create new branch
         run: |
-          git checkout -b hotfix-bases/${{ github.event.inputs.branch_name }} ${{ github.event.inputs.base_commit_sha }}
-          git push origin
+          git branch
+          git log
+
+          # git checkout -b hotfix-bases/${{ github.event.inputs.branch_name }} ${{ github.event.inputs.base_commit_sha }}
+          # git push origin
