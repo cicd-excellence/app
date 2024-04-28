@@ -37,8 +37,7 @@ jobs:
 
   infra:
     needs: [api, setup]
+    if: needs.setup.outputs.open_infra_pr == 'true'
     uses: ./.github/workflows/infra.yml
     secrets:
       GITOPS_DEMO_BOT_GITHUB_TOKEN: ${{ secrets.GITOPS_DEMO_BOT_GITHUB_TOKEN }}
-    with:
-      open_infra_pr: ${{ needs.setup.outputs.open_infra_pr }}
