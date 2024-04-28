@@ -2,17 +2,12 @@ name: Infra
 
 on:
   workflow_call:
-    inputs:
-      open_infra_pr:
-        required: true
-        type: string
     secrets:
       GITOPS_DEMO_BOT_GITHUB_TOKEN:
         required: true
 
 jobs:
   infra:
-    if: inputs.open_infra_pr == 'true'
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
