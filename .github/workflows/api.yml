@@ -27,4 +27,4 @@ jobs:
       - name: Publish
         if: inputs.publish == 'true'
         run: |
-          echo "Pretending publishing the API artifact with SHA $GITHUB_SHA."
+          echo "Pretending publishing the API artifact with SHA $GITHUB_SHA"
